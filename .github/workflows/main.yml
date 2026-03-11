@@ -1,0 +1,29 @@
+name: XcodeBenchmark
+
+on:
+  workflow_dispatch:
+
+jobs:
+  benchmark:
+    strategy:
+      matrix:
+        runner: [macos-15, macos-15-xlarge]
+      fail-fast: false
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: git clone
+        run: |
+          set -e
+          set -o pipefail
+          set -x
+          git clone https://github.com/bitrise-io/XcodeBenchmark.git
+          cd XcodeBenchmark
+          git checkout b667b70e8d80f02055dc58e525f9a855c62ebd99
+
+      - name: Run benchmark
+        run: |
+          set -e
+          set -o pipefail
+          set -x
+          cd $GITHUB_WORKSPACE/XcodeBenchmark
+          sh ./benchmark.sh
