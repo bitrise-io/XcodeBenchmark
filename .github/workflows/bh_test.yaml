@@ -1,4 +1,4 @@
-name: XcodeBenchmark
+name: BuildHub_XcodeBenchmark
 
 on:
   workflow_dispatch:
